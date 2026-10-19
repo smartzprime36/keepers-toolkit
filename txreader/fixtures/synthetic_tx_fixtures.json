@@ -1,0 +1,74 @@
+{
+  "about": "SYNTHETIC parser fixtures for the Keeper's Toolkit tx reader. These transactions were constructed byte by byte for testing; they were never broadcast and no real funds, wallets, or addresses are involved. The output addresses are what the parser derives from the invented script hashes in the constructed bytes.",
+  "fixtures": [
+    {
+      "id": "synthetic-doge-two-in-two-out",
+      "chain": "DOGE",
+      "synthetic": true,
+      "note": "Constructed in the toolkit repo: 2 inputs, P2PKH + P2SH outputs. All values invented.",
+      "raw_hex": "010000000211111111111111111111111111111111111111111111111111111111111111110000000048473030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030ffffffff000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f030000000100feffffff0215cd5b07000000001976a91400112233445566778899aabbccddeeff0011223388ac881300000000000017a914aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa8700000000",
+      "expect": {
+        "txid": "80ae65a83b9d5b6d802155e74a442a60d1dc4224ae95ff8c82ee3e3882d2b685",
+        "version": 1,
+        "ntime": null,
+        "vin": 2,
+        "vout": 2,
+        "inputs": [
+          {
+            "txid": "1111111111111111111111111111111111111111111111111111111111111111",
+            "vout": 0
+          },
+          {
+            "txid": "1f1e1d1c1b1a191817161514131211100f0e0d0c0b0a09080706050403020100",
+            "vout": 3
+          }
+        ],
+        "outputs": [
+          {
+            "address": "D59T4ioHyHdJ6SDzpE8mdz7ssh3atQqjiG",
+            "amount_sats": 123456789,
+            "script_type": "p2pkh"
+          },
+          {
+            "address": null,
+            "amount_sats": 5000,
+            "script_type": "p2sh"
+          }
+        ],
+        "total_out_sats": 123461789,
+        "speech": "",
+        "locktime": 0
+      }
+    },
+    {
+      "id": "synthetic-clam-with-speech",
+      "chain": "CLAM",
+      "synthetic": true,
+      "note": "Constructed in the toolkit repo: 1 input, 1 P2PKH output, nTime + ClamSpeech present. All values invented.",
+      "raw_hex": "0200000000f153650122222222222222222222222222222222222222222222222222222222222222220100000048473030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030303030ffffffff01606b042a010000001976a914ffeeddccbbaa998877665544332211000011223388ac3a4b45455045525320544f4f4c4b49542053594e5448455449432046495854555245202d204e4f542041205245414c205452414e53414354494f4e00000000",
+      "expect": {
+        "txid": "050413b262ec59a058da98215be2005dd9a167b9fc128c69714c689a96d17406",
+        "version": 2,
+        "ntime": 1700000000,
+        "vin": 1,
+        "vout": 1,
+        "inputs": [
+          {
+            "txid": "2222222222222222222222222222222222222222222222222222222222222222",
+            "vout": 1
+          }
+        ],
+        "outputs": [
+          {
+            "address": "xXdtMXH7K2DuJPCZJFpmq5bZ4qMj9Dm7SY",
+            "amount_sats": 4999900000,
+            "script_type": "p2pkh"
+          }
+        ],
+        "total_out_sats": 4999900000,
+        "speech": "KEEPERS TOOLKIT SYNTHETIC FIXTURE - NOT A REAL TRANSACTION",
+        "locktime": 0
+      }
+    }
+  ]
+}

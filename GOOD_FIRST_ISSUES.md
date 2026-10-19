@@ -7,7 +7,7 @@ clean-room rule (synthetic data only, constructed byte by byte)
 applies to every one of these.
 
 Run the whole suite before and after: `python3 run_tests.py`
-(current count: 26 tests, all passing).
+(current count: 29 tests, all passing).
 
 ---
 
@@ -29,7 +29,7 @@ file, and do not describe contents that aren't there.
 **Files touched.** `txreader/README.md` only.
 
 **Acceptance test.** Every path named in `txreader/README.md`
-exists in the repo; `python3 run_tests.py` still passes (26).
+exists in the repo; `python3 run_tests.py` still passes (29).
 
 **Difficulty.** First-PR size — under an hour.
 
@@ -58,7 +58,7 @@ fixtures up automatically — no test-code change should be needed).
 
 **Acceptance test.** `python3 -m unittest test_tx_parse -v` in
 `txreader/` passes with the new fixture included in
-`test_all_fixtures_parse_to_expectations`; full suite passes (26
+`test_all_fixtures_parse_to_expectations`; full suite passes (29
 plus any assertions the new fixture adds).
 
 **Difficulty.** Easy–medium. The work is the byte construction:
@@ -124,7 +124,7 @@ identically.
 **Acceptance test.** Tests assert message content for the three
 failure shapes (truncated input, trailing bytes, wrong-chain /
 undetectable input); all existing fixture expectations unchanged;
-full suite passes (26, with updated assertions where they pinned
+full suite passes (29, with updated assertions where they pinned
 bare `Exception`).
 
 **Difficulty.** Medium.
@@ -184,7 +184,7 @@ clean checkout before submitting.
 **Acceptance test.** Maintainer follows the walkthrough from a
 fresh clone using nothing else and reaches: green tests, two demo
 journals, the refusal visible in the demo output, and a rendered
-board — with zero improvisation. Full suite still passes (26).
+board — with zero improvisation. Full suite still passes (29).
 
 **Difficulty.** Easy to write, exacting to verify — the
 verification *is* the task.

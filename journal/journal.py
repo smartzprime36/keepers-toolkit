@@ -313,7 +313,8 @@ class SwapSession:
         elif state not in _TRANSITIONS[self.state]:
             raise JournalRefusal(
                 f"illegal transition {self.state} -> {state}")
-        if (state == "LEG1_WORKING" and mid_notional is not None
+        if (state in ("LEG1_WORKING", "LEG2_WORKING")
+                and mid_notional is not None
                 and mid_notional > self.cap):
             raise JournalRefusal(
                 f"mid-leg notional {mid_notional:.8f} exceeds the "

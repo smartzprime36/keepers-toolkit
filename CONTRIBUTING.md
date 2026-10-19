@@ -55,8 +55,8 @@ All tests run offline against synthetic data.
 
 ## Tests
 
-- **All suites must pass.** Current count: **26 tests** —
-  `journal` 13, `txreader` 5, `walletview` 8.
+- **All suites must pass.** Current count: **29 tests** —
+  `journal` 16, `txreader` 5, `walletview` 8.
 - New behaviour needs new tests. A PR that changes what the code
   does without a test that pins the new behaviour will be sent
   back for one.

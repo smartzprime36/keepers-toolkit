@@ -106,6 +106,34 @@ class TestSwapSession(unittest.TestCase):
         with self.assertRaises(JournalRefusal):
             sw.transition("LEG1_WORKING", mid_notional=0.001)
 
+    def test_cap_refusal_on_hub_shortcut(self):
+        # Issue #3 regression: when the source IS the hub asset there is
+        # no leg 1 — QUOTED -> LEG2_WORKING is legal — and the cap must
+        # still refuse an over-cap swap entering that working leg.
+        sw = SwapSession(self.j, "BTC", "DOGE", 10, cap=0.0002)
+        sw.transition("QUOTED")
+        with self.assertRaises(JournalRefusal):
+            sw.transition("LEG2_WORKING", mid_notional=0.001)
+        self.assertEqual(sw.state, "QUOTED")
+        self.assertEqual([r["state"] for r in self.j.rows()], ["QUOTED"])
+
+    def test_cap_refusal_on_leg2_after_leg1_filled(self):
+        # The other legal entry into LEG2_WORKING is capped too: the cap
+        # is enforced on every transition into a working leg.
+        sw = SwapSession(self.j, "CLAM", "DOGE", 10, cap=0.0002)
+        sw.transition("QUOTED")
+        sw.transition("LEG1_WORKING", mid_notional=0.0001)
+        sw.transition("LEG1_FILLED")
+        with self.assertRaises(JournalRefusal):
+            sw.transition("LEG2_WORKING", mid_notional=0.001)
+        self.assertEqual(sw.state, "LEG1_FILLED")
+
+    def test_hub_shortcut_under_cap_passes(self):
+        sw = SwapSession(self.j, "BTC", "DOGE", 10, cap=0.0002)
+        sw.transition("QUOTED")
+        sw.transition("LEG2_WORKING", mid_notional=0.0001)
+        self.assertEqual(sw.state, "LEG2_WORKING")
+
     def test_abort_from_any_state(self):
         sw = SwapSession(self.j, "CLAM", "DOGE", 10)
         sw.transition("QUOTED")
